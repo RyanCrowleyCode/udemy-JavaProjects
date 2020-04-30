@@ -14,11 +14,13 @@ public class Student {
     private String gradeYear;
     private Set<String> enrolledCourses = new HashSet<>();
 
+    Scanner scanner = new Scanner(System.in);
+
 
 
     public Student() {
         setStudentName();
-        System.out.println(this.firstName + " " + this.lastName);
+        changeGradeYear();
 
 //        this.testingUUID = UUID.randomUUID();
 //        System.out.println("UUID is: " + testingUUID);
@@ -34,23 +36,25 @@ public class Student {
                 "\n4. Senior " );
 
         // Conditional logic based on user input to assign gradeYear
-
-
+        int gradeYearChoice = scanner.nextInt();
+        if (gradeYearChoice == 1) { this.gradeYear = "freshman"; }
+        else if (gradeYearChoice == 2) { this.gradeYear = "sophomore"; }
+        else if (gradeYearChoice == 3) { this.gradeYear = "junior"; }
+        else { this.gradeYear = "senior"; }
     }
 
     private void setStudentName() {
-        Scanner in = new Scanner(System.in);
         // Ask for first name
         System.out.println("Student's first name: ");
 
         // Save result as this.firstName
-        this.firstName = in.nextLine();
+        this.firstName = scanner.nextLine();
 
         // Ask for last name
         System.out.println("Student's last name: ");
 
         // Save result as this.LastName
-        this.lastName = in.nextLine();
+        this.lastName = scanner.nextLine();
     }
 
 }
