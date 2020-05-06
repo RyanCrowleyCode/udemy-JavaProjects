@@ -27,7 +27,7 @@ public class Student {
 
         setStudentID();
 
-        System.out.println(firstName + " " + lastName + " " + gradeYear + " " + studentID);
+        System.out.println("\n" + firstName + " " + lastName + " (Grade Year: " + gradeYear + ") (Student ID: " + studentID +")\n");
     }
 
     // Generate an ID
@@ -40,21 +40,45 @@ public class Student {
 
     // Enroll in courses
     public void enroll() {
-        // Get inside a loop, user hits 0
-        System.out.println("Enter course to enroll (Q to quit):");
-        Scanner in = new Scanner(System.in);
-        String course = in.nextLine();
-        if (!course.equals("Q")) {
-            courses += "\n" + course;
-            tuitionBalance += costOfCourse;
-        }
-        System.out.println("ENROLLED IN: " + courses);
-        System.out.println("TUITION BALANCE: " + tuitionBalance);
+        // Get inside a loop, user hits Q
+        do {
+            System.out.print("Enter course to enroll (Q to quit): ");
+            Scanner in = new Scanner(System.in);
+            String course = in.nextLine();
+            if (course.equals("Q") || course.equals("q")) {
+                break;
+            }
+            else {
+                courses += "\n" + course;
+                tuitionBalance += costOfCourse;
+            }
+        } while (1 !=0);
+
+        System.out.println("\nENROLLED IN: " + courses);
+        System.out.println("\nTUITION BALANCE: $" + tuitionBalance);
     }
 
     // View balance
+    public void viewBalance() {
+        System.out.println("\nYour balance is: $" + tuitionBalance);
+    }
 
     // Pay Tuition
+    public void payTution() {
+        viewBalance();
+        System.out.print("Enter your payment: $");
+        Scanner in = new Scanner(System.in);
+        int payment = in.nextInt();
+
+        if (payment <= tuitionBalance) {
+            tuitionBalance -= payment;
+            System.out.println("\nYou have paid $" + payment + ".");
+        }
+        else {
+            System.out.println("\nOops! Your payment value cannot exceed your tuition balance. You are attempting to make a payment of $" + payment + ".");
+        }
+        viewBalance();
+    }
 
     // Show status
 
