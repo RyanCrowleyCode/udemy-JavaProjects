@@ -1,5 +1,6 @@
 package studentdatabaseapp;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Student {
@@ -7,7 +8,7 @@ public class Student {
     private String lastName;
     private int gradeYear;
     private String studentID;
-    private String courses = "";
+    private final ArrayList<String> courses = new ArrayList<>();
     private int tuitionBalance = 0;
     private static int costOfCourse = 600;
     private static int id = 1000;
@@ -26,8 +27,6 @@ public class Student {
         this.gradeYear = in.nextInt();
 
         setStudentID();
-
-        System.out.println("\n" + firstName + " " + lastName + " (Grade Year: " + gradeYear + ") (Student ID: " + studentID +")\n");
     }
 
     // Generate an ID
@@ -49,18 +48,15 @@ public class Student {
                 break;
             }
             else {
-                courses += "\n" + course;
+                courses.add(course);
                 tuitionBalance += costOfCourse;
             }
         } while (1 !=0);
-
-        System.out.println("\nENROLLED IN: " + courses);
-        System.out.println("\nTUITION BALANCE: $" + tuitionBalance);
     }
 
     // View balance
     public void viewBalance() {
-        System.out.println("\nYour balance is: $" + tuitionBalance);
+        System.out.println("Your balance is: $" + tuitionBalance);
     }
 
     // Pay Tuition
@@ -72,14 +68,30 @@ public class Student {
 
         if (payment <= tuitionBalance) {
             tuitionBalance -= payment;
-            System.out.println("\nYou have paid $" + payment + ".");
+            System.out.println("You have paid $" + payment + ".");
         }
         else {
-            System.out.println("\nOops! Your payment value cannot exceed your tuition balance. You are attempting to make a payment of $" + payment + ".");
+            System.out.println("Oops! Your payment value cannot exceed your tuition balance. You are attempting to make a payment of $" + payment + ".");
         }
         viewBalance();
     }
 
+    // Show courses
+    public String showCourses(){
+        String formattedCourseList = "Enrolled Courses:";
+        for (String course : courses) {
+            formattedCourseList += "\n\t" + course;
+        }
+        return formattedCourseList;
+    }
+
     // Show status
+    public String toString() {
+        return "Name: " + firstName + " " + lastName +
+                "\nGrade Level: " + gradeYear +
+                "\nStudent ID: " + studentID +
+                "\n" + showCourses() +
+                "\nBalance: $" + tuitionBalance;
+    }
 
 }
