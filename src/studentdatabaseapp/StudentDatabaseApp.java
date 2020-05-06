@@ -2,15 +2,11 @@ package studentdatabaseapp;
 
 public class StudentDatabaseApp {
     public static void main(String[] args) {
-        // Setting up the courses
-        Courses courseOptions = new Courses();
-        courseOptions.addCourse("History 101");
-        courseOptions.addCourse("Mathematics 101");
-        courseOptions.addCourse("English 101");
-        courseOptions.addCourse("Chemistry 101");
-        courseOptions.addCourse("Computer Science 101");
+        Student stu1 = new Student();
+        stu1.enroll();
+        // Ask how many new users we want to add
 
-        Student s = new Student();
+        // Create n number of new students
 
 
 

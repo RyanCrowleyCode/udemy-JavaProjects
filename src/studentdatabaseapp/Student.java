@@ -1,60 +1,61 @@
 package studentdatabaseapp;
 
-
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.UUID;
 
 public class Student {
     private String firstName;
     private String lastName;
-    private UUID testingUUID;
-    private int balance;
-    private String gradeYear;
-    private Set<String> enrolledCourses = new HashSet<>();
+    private int gradeYear;
+    private String studentID;
+    private String courses = "";
+    private int tuitionBalance = 0;
+    private static int costOfCourse = 600;
+    private static int id = 1000;
 
-    Scanner scanner = new Scanner(System.in);
 
-
-
+    // Constructor: prompt user to enter student's name and year
     public Student() {
-        setStudentName();
-        changeGradeYear();
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter student first name: ");
+        this.firstName = in.nextLine();
 
-//        this.testingUUID = UUID.randomUUID();
-//        System.out.println("UUID is: " + testingUUID);
-//        System.out.println("FIRST 4 of UUID: " + testingUUID.toString().substring(0, 4));
+        System.out.print("Enter student last name: ");
+        this.lastName = in.nextLine();
+
+        System.out.print("1 - Freshman\n2 - Sophomore\n3 - Junior\n4 - Senior\nEnter student grade level: ");
+        this.gradeYear = in.nextInt();
+
+        setStudentID();
+
+        System.out.println(firstName + " " + lastName + " " + gradeYear + " " + studentID);
     }
 
-    public void changeGradeYear() {
-        // Print out options
-        System.out.println("\nWhat year is the student? " +
-                "\n1. Freshman " +
-                "\n2. Sophomore " +
-                "\n3. Junior " +
-                "\n4. Senior " );
-
-        // Conditional logic based on user input to assign gradeYear
-        int gradeYearChoice = scanner.nextInt();
-        if (gradeYearChoice == 1) { this.gradeYear = "freshman"; }
-        else if (gradeYearChoice == 2) { this.gradeYear = "sophomore"; }
-        else if (gradeYearChoice == 3) { this.gradeYear = "junior"; }
-        else { this.gradeYear = "senior"; }
+    // Generate an ID
+    private void setStudentID() {
+        // Every time we create a student ID, we increment the id by one (static id)
+        id++;
+        // Grade Level + ID
+        this.studentID = gradeYear + "" + id;
     }
 
-    private void setStudentName() {
-        // Ask for first name
-        System.out.println("Student's first name: ");
-
-        // Save result as this.firstName
-        this.firstName = scanner.nextLine();
-
-        // Ask for last name
-        System.out.println("Student's last name: ");
-
-        // Save result as this.LastName
-        this.lastName = scanner.nextLine();
+    // Enroll in courses
+    public void enroll() {
+        // Get inside a loop, user hits 0
+        System.out.println("Enter course to enroll (Q to quit):");
+        Scanner in = new Scanner(System.in);
+        String course = in.nextLine();
+        if (!course.equals("Q")) {
+            courses += "\n" + course;
+            tuitionBalance += costOfCourse;
+        }
+        System.out.println("ENROLLED IN: " + courses);
+        System.out.println("TUITION BALANCE: " + tuitionBalance);
     }
+
+    // View balance
+
+    // Pay Tuition
+
+    // Show status
 
 }
